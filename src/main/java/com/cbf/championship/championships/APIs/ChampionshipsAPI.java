@@ -31,4 +31,12 @@ public class ChampionshipsAPI {
     public ResponseEntity<Object> finishChampionship(@RequestBody TeamsDto teamsDto) {
         return ResponseEntity.ok(this.championshipService.finishChampionship(teamsDto));
     }
+    @PutMapping("/replace/{id}")
+    public ResponseEntity<Object> replaceChampionship(@PathVariable Integer id, @RequestBody Championships championships){
+        return ResponseEntity.ok(this.championshipService.replaceChampionship(id, championships));
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteChampionship(@PathVariable Integer id) {
+        return ResponseEntity.ok(this.championshipService.deleteChampionship(id));
+    }
 }

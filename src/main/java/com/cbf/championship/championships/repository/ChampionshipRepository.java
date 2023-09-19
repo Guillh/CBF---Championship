@@ -17,15 +17,15 @@ public interface ChampionshipRepository extends JpaRepository<Championships, Int
     boolean countChampionshipsByNameAndDate(@Param("championshipName") String championshipName, @Param("championshipDate") Integer championshipDate);
 
     @Query(nativeQuery = true,
-            value = "select count(ct.team) " +
-                    "from classifications_table ct " +
-                    "where ct.championship_id  = :championshipId")
+            value = "SELECT COUNT(ct.team) " +
+                    "FROM classifications_table ct " +
+                    "WHERE ct.championship_id  = :championshipId")
     Integer countTeamsByChampionshipId(@Param("championshipId") Integer championshipId);
 
     @Query(nativeQuery = true,
-            value = "select COUNT(*) " +
-                    "from matches m " +
-                    "where m.championship_id = :championshipId")
+            value = "SELECT COUNT(*) " +
+                    "FROM matches m " +
+                    "WHERE m.championship_id = :championshipId")
     Integer countGamesPlayedByChampionshipId(@Param("championshipId") Integer championshipId);
 
     @Query(nativeQuery = true,
@@ -39,4 +39,18 @@ public interface ChampionshipRepository extends JpaRepository<Championships, Int
                     "FROM championships c " +
                     "WHERE c.championship_id  = :championshipId ")
     boolean checkChampionshipFinishStatus(@Param("championshipId") Integer championshipId);
+    @Query(nativeQuery = true,
+            value = "SELECT COUNT(ct.team) > 0 " +
+                    "FROM classifications_table ct " +
+                    "WHERE ct.team = :teamId " +
+                    "AND ct.championship_id = :championshipId ")
+    boolean checkIfTeamAlreadyOnChampionship(@Param("teamId") Integer teamId, @Param("championshipId") Integer championshipId);
+    @Query(nativeQuery = true,
+            value = "SELECT COUNT(*) > 0 " +
+                    "FROM championships c " +
+                    "WHERE c.championship_name = :championshipName ")
+    boolean countChampionshipsByName(@Param("championshipName") String championshipName);
+
+
 }
+
