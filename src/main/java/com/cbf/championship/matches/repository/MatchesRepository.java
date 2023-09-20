@@ -11,7 +11,7 @@ import java.util.Calendar;
 @Repository
 public interface MatchesRepository extends JpaRepository<Matches, Integer> {
 
-    @Query(nativeQuery = true,
+    @Query(nativeQuery = true, 
             value = "SELECT COUNT(*) > 0 " +
                     "FROM matches m " +
                     "WHERE (m.home_team = :teamId " +
